@@ -1,3 +1,5 @@
+{% load static %}
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Navbar</a>
@@ -26,20 +28,29 @@
 
 
           
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <li class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle text-info" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                 {{ user.username }}
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                {% if user.perfil.avatar %}
+                    <img src="{{ user.perfil.avatar.url }}" alt="Avatar" style="height: 30px; width: 30px; border-radius: 50%; object-fit: cover">
+                {% else %}
+                    <img src="{% static 'img/users/users.png' %}" alt="avatar" style="height: 30px; width: 30px; border-radius: 50%; object-fit: cover">
+                {% endif %}
+            </button>
+
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+        
+                {% if not user.perfil %}
+                    <li><a class="dropdown-item" href="{% url 'users:perfil_create' %}">Cargar perfil</a></li>
+                {% else %}
+                    <li><a class="dropdown-item" href="{% url 'users:perfil_detail' user.perfil.pk %}">Ver Perfil</a></li>
+                    <li><a class="dropdown-item" href="{% url 'users:perfil_update' user.perfil.pk %}">Actualizar Perfil</a></li>
+                    <li><a class="dropdown-item" href="{% url 'users:perfil_delete' user.perfil.pk %}">Eliminar Perfil</a></li>
+                {% endif %}
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'users:logout' %}">Logout</a></li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
+           </li>
         </ul>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

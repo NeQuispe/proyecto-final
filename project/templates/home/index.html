@@ -1,6 +1,6 @@
-
-
 {% extends "layout.html" %}
+{% load static %}
+
 
 
 
@@ -12,7 +12,13 @@
     
     {% include 'messages.html' %}
     {% if  user.is_authenticated %}
-        <h3 class="d-flex align-items-center"> Bienvenido {{ user.username }}<h3>
+    <h3 class="d-flex align-items-center">Bienvenido {{ user.username }}
+        {% if user.perfil.avatar %}
+            <img src="{{ user.perfil.avatar.url }}" alt="Avatar" style="height: 30px; width: 30px; border-radius: 50%; object-fit: cover"/> 
+        {% else %}
+            <img src="{% static 'img/users/users.png' %}" alt="Avatar" style="height: 30px; width: 30px; border-radius: 50%; object-fit: cover"/>
+        {% endif %}  
+    </h3>
     {% endif %}
     
 {% endblock content %}
