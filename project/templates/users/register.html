@@ -11,5 +11,6 @@
         </div>
     </form>
 
-    
+    {% url 'home:index' as url %}
+    {% include 'index_back.html' with link=url %}
 {% endblock content %}
