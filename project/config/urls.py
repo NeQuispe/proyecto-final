@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include(("home.urls", "home"))),
     path("users/", include(("users.urls", "users"))),
+    path("products/", include(("products.urls", "products"))),
 ]
 #! Valido en entorno de desarrollo: DEBUG= True
 if settings.DEBUG:
