@@ -2,11 +2,15 @@
 {% load static %}
 
 
+{% block header %}
+    <header class="bg-dark bg-gradient text-white p-5">
+        <div class="container px-1 text-center">
+            <h1 class="fw-bolder display-3">{% block title %}Mi app Django - Home{% endblock title %}</h1>
+        </div>
+    </header>
+{% endblock header %}
 
 
-{% block title %}
-    <h1>Titulooo</h1>
-{% endblock title %}
 
 {% block content %}
     
@@ -20,6 +24,8 @@
         {% endif %}  
     </h3>
     {% endif %}
-    
+
+    <h2 class="display-5 mb-4">Home</h2>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum, doloribus architecto. Id natus error voluptatibus maxime sit repellat similique, harum vero aspernatur ex nulla, nobis soluta quo. Officiis, numquam rerum.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
 {% endblock content %}
     
