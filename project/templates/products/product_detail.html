@@ -1,12 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+
     <h2 class="display-5 mb-4">Detalle de Producto</h2>
 
     <ul class="list-group">
         <li class="list-group-item"><strong>Nombre:</strong> {{ object.name }}</li>
         <li class="list-group-item"><strong>Precio:</strong> {{ object.price }}</li>
-        <li class="list-group-item"><strong>Stock:</strong> ${{ object.stock }}</li>
+        <li class="list-group-item"><strong>Stock:</strong> {{ object.stock }}</li>
         
         {% if object.image %}
             <li class="list-group-item"><strong>Imagen:</strong><br>

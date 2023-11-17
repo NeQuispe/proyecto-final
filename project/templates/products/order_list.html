@@ -1,0 +1,47 @@
+{% extends 'products/list.html' %}
+
+<h2 class="display-5 mb-4">Lista de Ordenes</h2>
+{% block search %}
+    <!-- Sirve para buscar Ordenes. Se pasa a la variable consulta de la vista. -->
+    <div class="py-lg-4">
+        <form action="{% url 'products:order_list' %}" method="get">
+            <input name="consulta" type="text" placeholder="Buscar por cliente...">
+        </form>
+    </div>
+{% endblock search %}
+
+{% block table_header %}
+    <tr>
+        <th>CLiente</th>
+        <th>Fecha</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Total</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+{% endblock table_header %}
+     
+{% block table_body %}
+    {% for order in object_list %}
+        <tr>
+            <td>{{ order.client }}</td>
+            <td>{{ order.created_at }}</td>
+            <td>{{ order.product }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>${{ order.total }}</td>
+        <td>
+            <a href="{% url 'products:order_detail' order.id %}" class="btn btn-secondary">Ver detalle</a>
+        </td>
+            {% if user.is_staff %} 
+                <td>
+                    <a href="{% url 'products:order_update' order.id %}" class="btn btn-primary">Actualizar</a>
+                </td>
+                <td>
+                    <a href="{% url 'products:order_delete' order.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+{% endblock table_body %}

@@ -12,13 +12,24 @@
 
 {% block content %}
     <div class="container mt-lg-3">
-        {% if user.is_staff %}
-            <h2 class="display-6 mb-4">Productos</h3>
+        <h2 class="display-6 mb-4">Productos</h3>
             <div class="d-grid gap-3">
-                <a href="{% url 'products:product_create' %}" class="btn btn-primary">Crear Producto</a>
+                {% if user.is_staff %}
+                    <a href="{% url 'products:product_create' %}" class="btn btn-primary">Crear Producto</a>
+                {% endif %}
                 <a href="{% url 'products:product_list' %}" class="btn btn-primary">Ver Productos</a> <br>
+            
             </div>
-        {% endif %}
+
+        <h2 class="display-6 mb-4">Ordenes</h3>
+            <div class="d-grid gap-3">
+                <a href="{% url 'products:order_create' %}" class="btn btn-primary">Crear Orden</a>
+                {% if user.is_staff %}
+                    <a href="{% url 'products:order_list' %}" class="btn btn-primary">Ver Ordenes</a> <br>
+                {% else %}
+                    <a href="{% url 'products:order_list' %}" class="btn btn-primary">Ver mis Ordenes</a> <br>
+                {% endif %}
+            </div>
 
         
         {% url 'home:index' as url %}

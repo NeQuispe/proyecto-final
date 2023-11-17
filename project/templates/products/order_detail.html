@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <h2 class="display-5 mb-4">Detalle de la orden</h2>
+
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Cliente:</strong> {{ object.client }}</li>
+        <li class="list-group-item"><strong>Fecha:</strong> {{ object.created_at }}</li>
+        <li class="list-group-item"><strong>Productos:</strong> {{ object.product }}</li>
+        <li class="list-group-item"><strong>Cantidad:</strong> {{ object.quantity }}</li>
+        <li class="list-group-item"><strong>Precio total:</strong> ${{ object.total }}</li>
+    </ul>
+
+    {% url 'products:order_list' as url %}
+    {% include 'index_back.html' with link=url %}
+{% endblock content %}

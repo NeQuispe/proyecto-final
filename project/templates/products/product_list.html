@@ -1,6 +1,7 @@
 {% extends 'products/list.html' %}
 
-<h2 class="display-5 mb-4">Lista de habitaciones</h2>
+
+<h2 class="display-5 mb-4">Lista de productos</h2>
 
 {% block search %}
     <!-- Sirve para buscar habitaciones. Se pasa a la variable consulta de la vista. -->
@@ -29,7 +30,7 @@
     {% for product in object_list %}
         <tr>
             <td>{{ product.name }}</td>
-            <td>${{ product.price }}</td>
+            <td>{{ product.price }}</td>
             <td>{{ product.stock }}</td>
             {% if product.image %}
                 <td><a href="{{ product.image.url }}">Ver imagen</a></td>
