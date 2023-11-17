@@ -1,0 +1,52 @@
+{% extends 'products/list.html' %}
+
+<h2 class="display-5 mb-4">Lista de habitaciones</h2>
+
+{% block search %}
+    <!-- Sirve para buscar habitaciones. Se pasa a la variable consulta de la vista. -->
+    <div class="py-lg-4">
+        <form action="{% url 'products:product_list' %}" method="get">
+            <input name="consulta" type="text" placeholder="Buscar por nombre...">
+        </form>
+    </div>
+{% endblock search %}
+
+{% block table_header %}
+    <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Imagen</th>
+        <th></th>
+        {% if user.is_staff %}
+            <th></th>
+            <th></th>
+        {% endif %}
+    </tr>
+{% endblock table_header %}
+     
+{% block table_body %}
+    {% for product in object_list %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>${{ product.price }}</td>
+            <td>{{ product.stock }}</td>
+            {% if product.image %}
+                <td><a href="{{ product.image.url }}">Ver imagen</a></td>
+            {% else %}
+                <td>Sin imagen</td>
+            {% endif %}
+            <td>
+                <a href="{% url 'products:product_detail' product.id %}" class="btn btn-secondary">Ver detalle</a>
+            </td>
+            {% if user.is_staff %} 
+                <td>
+                    <a href="{% url 'products:product_update' product.id %}" class="btn btn-primary">Actualizar</a>
+                </td>
+                <td>
+                    <a href="{% url 'products:product_delete' product.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+{% endblock table_body %}

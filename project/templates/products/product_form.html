@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2 class="display-5">Productos</h2>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="d-grid gap-3">
+            <button type="submi" class="btn btn-success">Guardar</button>
+        </div>
+    </form>
+    
+    {% url 'products:index' as url %}
+    {% include 'index_back.html' with link=url %}
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+
+{% block header %}
+    <header class="bg-dark bg-gradient text-white p-5">
+        <div class="container px-1 text-center">
+            <h1 class="fw-bolder display-3">{% block title %}Mi app Django - Productos{% endblock title %}</h1>
+        </div>
+    </header>
+{% endblock header %}
+
+
+{% block content %}
+    <div class="container mt-lg-3">
+        {% if user.is_staff %}
+            <h2 class="display-6 mb-4">Productos</h3>
+            <div class="d-grid gap-3">
+                <a href="{% url 'products:product_create' %}" class="btn btn-primary">Crear Producto</a>
+                <a href="{% url 'products:product_list' %}" class="btn btn-primary">Ver Productos</a> <br>
+            </div>
+        {% endif %}
+
+        
+        {% url 'home:index' as url %}
+        {% include 'index_back.html' with link=url %}
+    </div>
+{% endblock content %}
