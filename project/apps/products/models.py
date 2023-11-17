@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 # Create your models here.
 
 class Product(models.Model):
@@ -37,3 +38,7 @@ class Order(models.Model):
         self.product.stock += self.quantity
         self.product.save()
         super().delete(*args, **kwargs)
+        
+    def clean(self):
+        if self.quantity > self.product.stock:
+            raise ValidationError("No hay suficiente stock disponible para crear esta orden.")

@@ -74,6 +74,7 @@ class OrderDetailView(DetailView):
     
 class OrderListView(LoginRequiredMixin, ListView):
     model = models.Order
+    
     def get_queryset(self):
         """Si el usuario no es un miembro del staff, solo
         las ordenes que pertenecen al usuario que realiza la solicitud."""
@@ -107,8 +108,12 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
 class OrderUpdateView(LoginRequiredMixin, UpdateView):
     model = models.Order
     success_url = reverse_lazy("products:order_list")
-    form_class = forms.OrderForm
-
+    def get_form_class(self):
+        if self.request.user.is_staff:
+            return forms.StaffOrderForm
+        return forms.OrderForm
+    
+    
     def form_valid(self, form):
         if not self.request.user.is_staff:
             form.instance.client = self.request.user

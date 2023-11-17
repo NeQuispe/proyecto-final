@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from django.views.generic import TemplateView
+from django.contrib.auth.views import LoginView
 
 urlpatterns = [
     
@@ -13,13 +14,12 @@ urlpatterns = [
  
         # Order
     
+
     path("order/list/", views.OrderListView.as_view(), name="order_list"),
     path("order/detail/<int:pk>", views.OrderDetailView.as_view(), name="order_detail"),
     path("order/create/", views.OrderCreateView.as_view(), name="order_create"),
     path("order/delete/<int:pk>", views.OrderDeleteView.as_view(), name="order_delete"),
     path("order/update/<int:pk>", views.OrderUpdateView.as_view(), name="order_update"),
-    
        
-    
     
 ]
